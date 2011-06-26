@@ -30,18 +30,18 @@
 		B946D52813B6C6870004D676 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B946D52A13B6C6870004D676 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B946D52C13B6C6870004D676 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		B946D53013B6C6870004D676 /* OpenShooter-Info.plist */ = {isa = PBXFileReference; path = "OpenShooter-Info.plist"; sourceTree = "<group>"; };
+		B946D53013B6C6870004D676 /* OpenShooter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OpenShooter-Info.plist"; sourceTree = "<group>"; };
 		B946D53213B6C6870004D676 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		B946D53413B6C6870004D676 /* OpenShooter-Prefix.pch */ = {isa = PBXFileReference; path = "OpenShooter-Prefix.pch"; sourceTree = "<group>"; };
+		B946D53413B6C6870004D676 /* OpenShooter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenShooter-Prefix.pch"; sourceTree = "<group>"; };
 		B946D53513B6C6870004D676 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		B946D53713B6C6870004D676 /* OpenShooterAppDelegate.h */ = {isa = PBXFileReference; path = OpenShooterAppDelegate.h; sourceTree = "<group>"; };
+		B946D53713B6C6870004D676 /* OpenShooterAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenShooterAppDelegate.h; sourceTree = "<group>"; };
 		B946D53813B6C6870004D676 /* OpenShooterAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenShooterAppDelegate.m; sourceTree = "<group>"; };
 		B946D53B13B6C6870004D676 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		B946D53D13B6C6870004D676 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
 		B946D53F13B6C6870004D676 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
-		B946D54113B6C6870004D676 /* EAGLView.h */ = {isa = PBXFileReference; path = EAGLView.h; sourceTree = "<group>"; };
+		B946D54113B6C6870004D676 /* EAGLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
 		B946D54213B6C6870004D676 /* EAGLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
-		B946D54413B6C6870004D676 /* OpenShooterViewController.h */ = {isa = PBXFileReference; path = OpenShooterViewController.h; sourceTree = "<group>"; };
+		B946D54413B6C6870004D676 /* OpenShooterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenShooterViewController.h; sourceTree = "<group>"; };
 		B946D54513B6C6870004D676 /* OpenShooterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenShooterViewController.m; sourceTree = "<group>"; };
 		B946D54813B6C6870004D676 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/OpenShooterViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -266,6 +266,7 @@
 				GCC_PREFIX_HEADER = "OpenShooter/OpenShooter-Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "OpenShooter/OpenShooter-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -280,6 +281,7 @@
 				GCC_PREFIX_HEADER = "OpenShooter/OpenShooter-Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "OpenShooter/OpenShooter-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
