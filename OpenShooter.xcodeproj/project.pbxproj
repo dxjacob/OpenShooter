@@ -14,13 +14,14 @@
 		B946D52D13B6C6870004D676 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B946D52C13B6C6870004D676 /* OpenGLES.framework */; };
 		B946D53313B6C6870004D676 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B946D53113B6C6870004D676 /* InfoPlist.strings */; };
 		B946D53613B6C6870004D676 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B946D53513B6C6870004D676 /* main.m */; };
-		B946D53913B6C6870004D676 /* OpenShooterAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B946D53813B6C6870004D676 /* OpenShooterAppDelegate.m */; };
+		B946D53913B6C6870004D676 /* OpenShooterAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = B946D53813B6C6870004D676 /* OpenShooterAppDelegate.mm */; };
 		B946D53C13B6C6870004D676 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = B946D53A13B6C6870004D676 /* MainWindow.xib */; };
 		B946D53E13B6C6870004D676 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = B946D53D13B6C6870004D676 /* Shader.fsh */; };
 		B946D54013B6C6870004D676 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = B946D53F13B6C6870004D676 /* Shader.vsh */; };
 		B946D54313B6C6870004D676 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = B946D54213B6C6870004D676 /* EAGLView.m */; };
-		B946D54613B6C6870004D676 /* OpenShooterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B946D54513B6C6870004D676 /* OpenShooterViewController.m */; };
+		B946D54613B6C6870004D676 /* OpenShooterViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B946D54513B6C6870004D676 /* OpenShooterViewController.mm */; };
 		B946D54913B6C6870004D676 /* OpenShooterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B946D54713B6C6870004D676 /* OpenShooterViewController.xib */; };
+		B971485613BBBC9B0039DE45 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B971485413BBBC9A0039DE45 /* Mesh.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,15 +36,17 @@
 		B946D53413B6C6870004D676 /* OpenShooter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenShooter-Prefix.pch"; sourceTree = "<group>"; };
 		B946D53513B6C6870004D676 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B946D53713B6C6870004D676 /* OpenShooterAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenShooterAppDelegate.h; sourceTree = "<group>"; };
-		B946D53813B6C6870004D676 /* OpenShooterAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenShooterAppDelegate.m; sourceTree = "<group>"; };
+		B946D53813B6C6870004D676 /* OpenShooterAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenShooterAppDelegate.mm; sourceTree = "<group>"; };
 		B946D53B13B6C6870004D676 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		B946D53D13B6C6870004D676 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
 		B946D53F13B6C6870004D676 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
 		B946D54113B6C6870004D676 /* EAGLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
 		B946D54213B6C6870004D676 /* EAGLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
 		B946D54413B6C6870004D676 /* OpenShooterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenShooterViewController.h; sourceTree = "<group>"; };
-		B946D54513B6C6870004D676 /* OpenShooterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenShooterViewController.m; sourceTree = "<group>"; };
+		B946D54513B6C6870004D676 /* OpenShooterViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenShooterViewController.mm; sourceTree = "<group>"; };
 		B946D54813B6C6870004D676 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/OpenShooterViewController.xib; sourceTree = "<group>"; };
+		B971485413BBBC9A0039DE45 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
+		B971485513BBBC9B0039DE45 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,16 +98,18 @@
 			isa = PBXGroup;
 			children = (
 				B946D53713B6C6870004D676 /* OpenShooterAppDelegate.h */,
-				B946D53813B6C6870004D676 /* OpenShooterAppDelegate.m */,
+				B946D53813B6C6870004D676 /* OpenShooterAppDelegate.mm */,
 				B946D53A13B6C6870004D676 /* MainWindow.xib */,
 				B946D53D13B6C6870004D676 /* Shader.fsh */,
 				B946D53F13B6C6870004D676 /* Shader.vsh */,
 				B946D54113B6C6870004D676 /* EAGLView.h */,
 				B946D54213B6C6870004D676 /* EAGLView.m */,
 				B946D54413B6C6870004D676 /* OpenShooterViewController.h */,
-				B946D54513B6C6870004D676 /* OpenShooterViewController.m */,
+				B946D54513B6C6870004D676 /* OpenShooterViewController.mm */,
 				B946D54713B6C6870004D676 /* OpenShooterViewController.xib */,
 				B946D52F13B6C6870004D676 /* Supporting Files */,
+				B971485413BBBC9A0039DE45 /* Mesh.cpp */,
+				B971485513BBBC9B0039DE45 /* Mesh.h */,
 			);
 			path = OpenShooter;
 			sourceTree = "<group>";
@@ -186,9 +191,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B946D53613B6C6870004D676 /* main.m in Sources */,
-				B946D53913B6C6870004D676 /* OpenShooterAppDelegate.m in Sources */,
+				B946D53913B6C6870004D676 /* OpenShooterAppDelegate.mm in Sources */,
 				B946D54313B6C6870004D676 /* EAGLView.m in Sources */,
-				B946D54613B6C6870004D676 /* OpenShooterViewController.m in Sources */,
+				B946D54613B6C6870004D676 /* OpenShooterViewController.mm in Sources */,
+				B971485613BBBC9B0039DE45 /* Mesh.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +313,7 @@
 				B946D54E13B6C6870004D676 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

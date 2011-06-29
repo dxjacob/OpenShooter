@@ -6,9 +6,9 @@
 //  Copyright 2011 SMT. All rights reserved.
 //
 
-varying lowp vec4 colorVarying;
+varying lowp vec4 Color;
 
 void main()
 {
-    gl_FragColor = colorVarying;
+    gl_FragColor = Color;
 }

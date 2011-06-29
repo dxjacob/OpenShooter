@@ -9,11 +9,9 @@
 #import <UIKit/UIKit.h>
 
 #import <OpenGLES/EAGL.h>
-
-#import <OpenGLES/ES1/gl.h>
-#import <OpenGLES/ES1/glext.h>
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
+#import "Mesh.h"
 
 @interface OpenShooterViewController : UIViewController {
 @private
@@ -23,6 +21,8 @@
     BOOL animating;
     NSInteger animationFrameInterval;
     CADisplayLink *displayLink;
+    
+    Mesh *mesh;
 }
 
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
