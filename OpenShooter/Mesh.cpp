@@ -1,7 +1,5 @@
 #include "Mesh.h"
 #include "math.h"
-#include <iostream>
-using namespace std;
 
 #define toRadians(x) (x*M_PI/180.0)
 
@@ -24,16 +22,12 @@ Mesh::Mesh()
         float x = radius * cosf(angle);
         float z = radius * sinf(angle);
         
-        cout << "angle: " << angle << endl;
-        
         *v++ = Vertex(x, -height/2, z);
         *v++ = Vertex(x, height/2, z);
         
         // color
         GLubyte red = 255 * (i / (float)sides);
         Color color(red, 0, 0, 255);
-        
-        cout << "color: " << (int)red << endl;
         
         *c++ = color;
         *c++ = color;
