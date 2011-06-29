@@ -11,10 +11,8 @@ Mesh::Mesh()
     
     vertexCount_ = 2 * (sides + 1);
     vertices_ = new Vertex[vertexCount_];
-    colors_ = new Color[vertexCount_];
     
     Vertex *v = vertices_;
-    Color *c = colors_;
     for (int i = 0; i <= sides; ++i)
     {
         // position
@@ -22,23 +20,20 @@ Mesh::Mesh()
         float x = radius * cosf(angle);
         float z = radius * sinf(angle);
         
-        *v++ = Vertex(x, -height/2, z);
-        *v++ = Vertex(x, height/2, z);
-        
         // color
         GLubyte red = 255 * (i / (float)sides);
         Color color(red, 0, 0, 255);
         
-        *c++ = color;
-        *c++ = color;
+        *v++ = Vertex( Vector(x, -height/2, z), color);
+        *v++ = Vertex( Vector(x, height/2, z), color);
     }  
 }
 
 void Mesh::Draw(int positionAttrib, int colorAttrib)
 {
-    glVertexAttribPointer(positionAttrib, 3, GL_FLOAT, 0, 0, vertices_);
+    glVertexAttribPointer(positionAttrib, 3, GL_FLOAT, 0, sizeof(Vertex), &vertices_[0].position);
     glEnableVertexAttribArray(positionAttrib);
-    glVertexAttribPointer(colorAttrib, 4, GL_UNSIGNED_BYTE, 1, 0, colors_);
+    glVertexAttribPointer(colorAttrib, 4, GL_UNSIGNED_BYTE, 1, sizeof(Vertex), &vertices_[0].color);
     glEnableVertexAttribArray(colorAttrib);
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, vertexCount_);
@@ -47,5 +42,4 @@ void Mesh::Draw(int positionAttrib, int colorAttrib)
 Mesh::~Mesh()
 {
     delete vertices_;
-    delete colors_;
 }

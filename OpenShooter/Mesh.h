@@ -2,12 +2,11 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
-struct Vertex
+struct Vector
 {
     GLfloat x, y, z;
-    
-    Vertex() {};
-    Vertex(GLfloat x, GLfloat y, GLfloat z)
+    Vector() {};
+    Vector(GLfloat x, GLfloat y, GLfloat z)
     : x(x), y(y), z(z)
     {}
 };
@@ -21,6 +20,17 @@ struct Color
     {}
 };
 
+struct Vertex
+{
+    Vector position;
+    Color color;
+    
+    Vertex() {};
+    Vertex(Vector position, Color color)
+    : position(position), color(color)
+    {}
+};
+
 class Mesh
 {
 public:
@@ -31,7 +41,6 @@ public:
     
 private:
     Vertex *vertices_;
-    Color *colors_;
     
     int vertexCount_;
     int colorCount_;
