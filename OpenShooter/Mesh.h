@@ -40,7 +40,7 @@ public:
     void Draw(int vertexAttribute, int colorAttribute);
     
 private:
-    Vertex *vertices_;
+    GLuint bufferId_;
     
     int vertexCount_;
     int colorCount_;
