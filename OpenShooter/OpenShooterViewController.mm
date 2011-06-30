@@ -17,6 +17,7 @@ enum {
     UNIFORM_VIEW,
     UNIFORM_PROJECTION,
     UNIFORM_TEXTURESAMPLER,
+    UNIFORM_CAMERAPOSITION,
     NUM_UNIFORMS
 };
 GLint uniforms[NUM_UNIFORMS];
@@ -186,8 +187,10 @@ enum {
     glUniform1i(uniforms[UNIFORM_TEXTURESAMPLER], 0);
     
     // view
-    Matrix4 view = Matrix4::lookAt(Point3(0, 5, -5), Point3(0,0,0), Vector3(0,1,0));
+    Point3 cameraPosition(0, 5, -5);
+    Matrix4 view = Matrix4::lookAt(cameraPosition, Point3(0,0,0), Vector3(0,1,0));
     glUniformMatrix4fv(uniforms[UNIFORM_VIEW], 1, 0, &view[0][0]);
+    glUniform3fv(uniforms[UNIFORM_CAMERAPOSITION], 1, &cameraPosition[0]);
     
     // projection
     CGSize size = [self view].frame.size;
@@ -357,6 +360,7 @@ enum {
     uniforms[UNIFORM_VIEW] = glGetUniformLocation(program, "View");
     uniforms[UNIFORM_PROJECTION] = glGetUniformLocation(program, "Projection");
     uniforms[UNIFORM_TEXTURESAMPLER] = glGetUniformLocation(program, "TextureSampler");
+    uniforms[UNIFORM_CAMERAPOSITION] = glGetUniformLocation(program, "CameraPosition");
     
     // Release vertex and fragment shaders.
     if (vertShader)
