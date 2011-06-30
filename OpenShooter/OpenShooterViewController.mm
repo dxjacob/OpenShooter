@@ -26,6 +26,7 @@ GLint uniforms[NUM_UNIFORMS];
 enum {
     ATTRIB_VERTEX,
     ATTRIB_COLOR,
+    ATTRIB_TEXTURECOORD,
     NUM_ATTRIBUTES
 };
 
@@ -188,12 +189,12 @@ enum {
     // draw once
     Matrix4 model = Matrix4::translation(Vector3(0.5,0,0)) * Matrix4::rotationX(time*0.1);
     glUniformMatrix4fv(uniforms[UNIFORM_MODEL], 1, 0, &model[0][0]);
-    mesh->Draw(ATTRIB_VERTEX, ATTRIB_COLOR);
+    mesh->Draw(ATTRIB_VERTEX, ATTRIB_COLOR, ATTRIB_TEXTURECOORD);
     
     // draw twice
     model = Matrix4::translation(Vector3(-0.5,0,0)) * Matrix4::rotationX(-time);
     glUniformMatrix4fv(uniforms[UNIFORM_MODEL], 1, 0, &model[0][0]);
-    mesh->Draw(ATTRIB_VERTEX, ATTRIB_COLOR);
+    mesh->Draw(ATTRIB_VERTEX, ATTRIB_COLOR, ATTRIB_TEXTURECOORD);
     
     [(EAGLView *)self.view presentFramebuffer];
 }
@@ -316,6 +317,7 @@ enum {
     // This needs to be done prior to linking.
     glBindAttribLocation(program, ATTRIB_VERTEX, "position");
     glBindAttribLocation(program, ATTRIB_COLOR, "color");
+    glBindAttribLocation(program, ATTRIB_TEXTURECOORD, "textureCoord");
     
     // Link program.
     if (![self linkProgram:program])

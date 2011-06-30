@@ -22,6 +22,7 @@
 		B946D54613B6C6870004D676 /* OpenShooterViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B946D54513B6C6870004D676 /* OpenShooterViewController.mm */; };
 		B946D54913B6C6870004D676 /* OpenShooterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B946D54713B6C6870004D676 /* OpenShooterViewController.xib */; };
 		B971485613BBBC9B0039DE45 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B971485413BBBC9A0039DE45 /* Mesh.cpp */; };
+		B971485C13BC12630039DE45 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B971485A13BC12610039DE45 /* Texture.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,8 @@
 		B9EB412F13BC3B74006FF790 /* quat_aos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = quat_aos.h; sourceTree = "<group>"; };
 		B9EB413013BC3B74006FF790 /* vec_aos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vec_aos.h; sourceTree = "<group>"; };
 		B9EB413113BC3B74006FF790 /* vectormath_aos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vectormath_aos.h; sourceTree = "<group>"; };
+		B971485A13BC12610039DE45 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
+		B971485B13BC12610039DE45 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,8 @@
 				B946D52F13B6C6870004D676 /* Supporting Files */,
 				B971485413BBBC9A0039DE45 /* Mesh.cpp */,
 				B971485513BBBC9B0039DE45 /* Mesh.h */,
+				B971485A13BC12610039DE45 /* Texture.cpp */,
+				B971485B13BC12610039DE45 /* Texture.h */,
 			);
 			path = OpenShooter;
 			sourceTree = "<group>";
@@ -215,6 +220,7 @@
 				B946D54313B6C6870004D676 /* EAGLView.m in Sources */,
 				B946D54613B6C6870004D676 /* OpenShooterViewController.mm in Sources */,
 				B971485613BBBC9B0039DE45 /* Mesh.cpp in Sources */,
+				B971485C13BC12630039DE45 /* Texture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
