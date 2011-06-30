@@ -15,7 +15,12 @@ uniform sampler2D TextureSampler;
 
 const lowp vec3 LightDirection = vec3(0.707, 0, -0.707);
 const lowp vec3 LightColor = vec3(1, 1, 1);
+
 const lowp vec3 RimLightColor = vec3(0.15, 0.3, 0.6);
+
+const lowp float SpecularPower = 1.0;
+const highp float SpecularHardness = 4.0;
+const lowp vec3 SpecularColor = vec3(1,1,1);
 
 void main()
 {
@@ -28,10 +33,15 @@ void main()
     rim = pow(1.0 - abs(rim), 3.0);
     highp vec3 rimColor = rim * RimLightColor;
     
+    // specular
+    highp float specularAmount = dot(Normal, reflect(LightDirection, CameraView));
+    specularAmount = pow(max(specularAmount, 0.0), SpecularHardness);
+    highp vec3 specular = SpecularPower * SpecularColor * specularAmount;
+    
     // texture
     highp vec3 textureColor = texture2D(TextureSampler, TextureCoord).xyz;
     
     // final
-    highp vec3 frag = diffuse * textureColor + rimColor;
+    highp vec3 frag = diffuse * textureColor + rimColor + specular;
     gl_FragColor = vec4(frag.xyz,1);
 }
