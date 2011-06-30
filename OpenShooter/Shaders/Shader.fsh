@@ -24,17 +24,20 @@ const lowp vec3 SpecularColor = vec3(1,1,1);
 
 void main()
 {
+    lowp vec3 normal = normalize(Normal);
+    lowp vec3 cameraDir = normalize(CameraView);
+    
     // half lambert
-    highp vec3 diffuse = LightColor * dot(LightDirection, normalize(Normal));
+    highp vec3 diffuse = LightColor * dot(LightDirection, normal);
     diffuse = diffuse * 0.5 + 0.5;
     
     // rim
-    highp float rim = dot(normalize(CameraView), normalize(Normal));
+    highp float rim = dot(cameraDir, normal);
     rim = pow(1.0 - abs(rim), 3.0);
     highp vec3 rimColor = rim * RimLightColor;
     
     // specular
-    highp float specularAmount = dot(Normal, reflect(LightDirection, CameraView));
+    highp float specularAmount = dot(normal, reflect(LightDirection, cameraDir));
     specularAmount = pow(max(specularAmount, 0.0), SpecularHardness);
     highp vec3 specular = SpecularPower * SpecularColor * specularAmount;
     
