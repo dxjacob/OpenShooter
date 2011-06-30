@@ -23,6 +23,7 @@
 		B946D54913B6C6870004D676 /* OpenShooterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B946D54713B6C6870004D676 /* OpenShooterViewController.xib */; };
 		B971485613BBBC9B0039DE45 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B971485413BBBC9A0039DE45 /* Mesh.cpp */; };
 		B971485C13BC12630039DE45 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B971485A13BC12610039DE45 /* Texture.cpp */; };
+		B98F823213BCDA8F00920660 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B98F823013BCDA8F00920660 /* GameState.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,8 @@
 		B971485513BBBC9B0039DE45 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
 		B971485A13BC12610039DE45 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		B971485B13BC12610039DE45 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
+		B98F823013BCDA8F00920660 /* GameState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameState.cpp; sourceTree = "<group>"; };
+		B98F823113BCDA8F00920660 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
 		B9B41AFB13BC5E800016D055 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
 		B9EB412C13BC3B74006FF790 /* boolInVec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = boolInVec.h; sourceTree = "<group>"; };
 		B9EB412D13BC3B74006FF790 /* floatInVec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = floatInVec.h; sourceTree = "<group>"; };
@@ -124,6 +127,8 @@
 				B971485A13BC12610039DE45 /* Texture.cpp */,
 				B971485B13BC12610039DE45 /* Texture.h */,
 				B9B41AFB13BC5E800016D055 /* Vertex.h */,
+				B98F823013BCDA8F00920660 /* GameState.cpp */,
+				B98F823113BCDA8F00920660 /* GameState.h */,
 			);
 			path = OpenShooter;
 			sourceTree = "<group>";
@@ -223,6 +228,7 @@
 				B946D54613B6C6870004D676 /* OpenShooterViewController.mm in Sources */,
 				B971485613BBBC9B0039DE45 /* Mesh.cpp in Sources */,
 				B971485C13BC12630039DE45 /* Texture.cpp in Sources */,
+				B98F823213BCDA8F00920660 /* GameState.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

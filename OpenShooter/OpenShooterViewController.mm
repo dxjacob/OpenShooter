@@ -66,13 +66,19 @@ enum {
     animationFrameInterval = 1;
     self.displayLink = nil;
 
+    // initialize some gl stuff
+    state = new GameState();
     mesh = Mesh::CreateCylinder(6, 0.2, 0.5);
     texture = new Texture();
     glEnable(GL_DEPTH_TEST);
+    
+    // initialize game stuff
+
 }
 
 - (void)dealloc
 {
+    delete state;
     delete mesh;
     delete texture;
     
@@ -169,40 +175,15 @@ enum {
     }
 }
 
-- (void)update
-{
-    const float RemoveDistance = 10;
-    const float ProjectileSpeed = 0.25;
-    
-    // update projectiles
-    vector<Point3>::iterator it;
-    for (it = projectiles.begin(); it != projectiles.end();)
-    {
-        Point3& position = *it;
-        
-        // update position 
-        position += Vector3(0,0,ProjectileSpeed);
-        
-        // remove
-        if (position.getZ() > RemoveDistance)
-            projectiles.erase(it);
-        else
-            it++;
-    }
-}
-
 - (void)drawFrame
 {
-    [self update];
+    state->Update(0.075);
     
     [(EAGLView *)self.view setFramebuffer];
         
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    static float time = 0;
-    time += 0.075;
-    
     // shader
     glUseProgram(program);
     
@@ -223,12 +204,21 @@ enum {
     glUniformMatrix4fv(uniforms[UNIFORM_PROJECTION], 1, 0, &projection[0][0]);
     
     // draw projectiles
+    const std::vector<Point3>& projectiles = state->GetProjectiles();
     for (int i = 0, count = projectiles.size(); i < count; ++i)
     {
         Matrix4 model = Matrix4::translation(Vector3(projectiles[i]));
         glUniformMatrix4fv(uniforms[UNIFORM_MODEL], 1, 0, &model[0][0]);
         mesh->Draw(ATTRIB_VERTEX, ATTRIB_COLOR, ATTRIB_TEXTURECOORD, ATTRIB_NORMAL);
     }
+    
+    const std::vector<Point3>& enemies = state->GetEnemies();
+    for (int i = 0, count = enemies.size(); i < count; ++i)
+    {
+        Matrix4 model = Matrix4::translation(Vector3(enemies[i]));
+        glUniformMatrix4fv(uniforms[UNIFORM_MODEL], 1, 0, &model[0][0]);
+        mesh->Draw(ATTRIB_VERTEX, ATTRIB_COLOR, ATTRIB_TEXTURECOORD, ATTRIB_NORMAL);
+    }     
     
     [(EAGLView *)self.view presentFramebuffer];
 }
@@ -396,7 +386,7 @@ enum {
 
 - (void) touchesBegan: (NSSet*) touches withEvent: (UIEvent*) event
 {
-    projectiles.push_back(Point3(0,0,0));
+    state->Shoot();
 }
 
 

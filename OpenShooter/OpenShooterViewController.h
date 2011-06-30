@@ -11,9 +11,10 @@
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
-#import "Mesh.h"
-#import "Texture.h"
 #import <vector>
+#import "GameState.h"
+#import "Texture.h"
+#import "Mesh.h"
 
 @interface OpenShooterViewController : UIViewController {
 @private
@@ -26,7 +27,8 @@
     
     Mesh *mesh;
     Texture *texture;
-    std::vector<Point3> projectiles;
+    GameState *state;
+
 }
 
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
