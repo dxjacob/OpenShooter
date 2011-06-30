@@ -6,13 +6,9 @@ using namespace std;
 
 #define toRadians(x) (x*M_PI/180.0)
 
-Mesh::Mesh()
+Mesh* Mesh::CreateCylinder(int sides, float radius, float height)
 {
-    int sides = 6;
-    float radius = 0.2;
-    float height = 0.5;
-    
-    vertexCount_ = 2 * (sides + 1);
+    int vertexCount = 2 * (sides + 1);
     vector<Vertex> vertices;
     for (int i = 0; i <= sides; ++i)
     {
@@ -34,10 +30,18 @@ Mesh::Mesh()
         vertices.push_back( Vertex( Vector3(x, -height/2, z), color, TextureCoord(u, 0), normal ) );
         vertices.push_back( Vertex( Vector3(x, height/2, z), color, TextureCoord(u, 1), normal ) );
     }  
+    
+    GLuint bufferId;
+    glGenBuffers(1, &bufferId);
+    glBindBuffer(GL_ARRAY_BUFFER, bufferId);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertexCount, &vertices[0], GL_STATIC_DRAW);
+    
+    return new Mesh(bufferId, vertexCount);
+}
 
-    glGenBuffers(1, &bufferId_);
-    glBindBuffer(GL_ARRAY_BUFFER, bufferId_);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertexCount_, &vertices[0], GL_STATIC_DRAW);
+Mesh* Mesh::CreateQuad()
+{
+    return new Mesh(0, 0);
 }
 
 void Mesh::Draw(int positionAttrib, int colorAttrib, int textureAttrib, int normalAttrib)

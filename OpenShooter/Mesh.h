@@ -4,14 +4,18 @@
 class Mesh
 {
 public:
-    Mesh();
+    Mesh(GLuint bufferId, int vertexCount)
+    : bufferId_(bufferId), vertexCount_(vertexCount)
+    {}
+    
     ~Mesh();
     
     void Draw(int vertexAttribute, int colorAttribute, int textureAttrib, int normalAttrib);
     
+    static Mesh* CreateCylinder(int sides, float radius, float height);
+    static Mesh* CreateQuad();
+    
 private:
     GLuint bufferId_;
-    
     int vertexCount_;
-    int colorCount_;
 };

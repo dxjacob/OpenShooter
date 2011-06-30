@@ -65,7 +65,7 @@ enum {
     animationFrameInterval = 1;
     self.displayLink = nil;
 
-    mesh = new Mesh();
+    mesh = Mesh::CreateCylinder(6, 0.2, 0.5);
     texture = new Texture();
     glEnable(GL_DEPTH_TEST);
 }
