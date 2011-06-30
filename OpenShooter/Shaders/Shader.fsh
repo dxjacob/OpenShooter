@@ -9,7 +9,9 @@
 varying lowp vec4 Color;
 varying lowp vec2 TextureCoord;
 
+uniform sampler2D TextureSampler;
+
 void main()
 {
-    gl_FragColor = vec4(TextureCoord.x, TextureCoord.y, 0, 1);
+    gl_FragColor = texture2D(TextureSampler, TextureCoord);
 }

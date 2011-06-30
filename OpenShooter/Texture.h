@@ -1,6 +1,5 @@
 #pragma once
-#import <OpenGLES/ES2/gl.h>
-#import <OpenGLES/ES2/glext.h>
+#include "Vertex.h"
 
 class Texture
 {

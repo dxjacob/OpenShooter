@@ -10,14 +10,13 @@
 
 #import "OpenShooterViewController.h"
 #import "EAGLView.h"
-#include "vectormath/vectormath_aos.h"
-using namespace Vectormath::Aos;
 
 // Uniform index.
 enum {
     UNIFORM_MODEL,
     UNIFORM_VIEW,
     UNIFORM_PROJECTION,
+    UNIFORM_TEXTURESAMPLER,
     NUM_UNIFORMS
 };
 GLint uniforms[NUM_UNIFORMS];
@@ -65,12 +64,14 @@ enum {
     self.displayLink = nil;
 
     mesh = new Mesh();
+    texture = new Texture();
     glEnable(GL_DEPTH_TEST);
 }
 
 - (void)dealloc
 {
     delete mesh;
+    delete texture;
     
     if (program) {
         glDeleteProgram(program);
@@ -178,6 +179,12 @@ enum {
     // shader
     glUseProgram(program);
     
+    // texture
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture->GetId());
+    glUniform1i(uniforms[UNIFORM_TEXTURESAMPLER], 0);
+    
+    // view
     Matrix4 view = Matrix4::lookAt(Point3(0, 5, -5), Point3(0,0,0), Vector3(0,1,0));
     glUniformMatrix4fv(uniforms[UNIFORM_VIEW], 1, 0, &view[0][0]);
     
@@ -187,7 +194,7 @@ enum {
     glUniformMatrix4fv(uniforms[UNIFORM_PROJECTION], 1, 0, &projection[0][0]);
     
     // draw once
-    Matrix4 model = Matrix4::translation(Vector3(0.5,0,0)) * Matrix4::rotationX(time*0.1);
+    Matrix4 model = Matrix4::translation(Vector3(0.5,0,0)) * Matrix4::rotationY(time*0.25);
     glUniformMatrix4fv(uniforms[UNIFORM_MODEL], 1, 0, &model[0][0]);
     mesh->Draw(ATTRIB_VERTEX, ATTRIB_COLOR, ATTRIB_TEXTURECOORD);
     
@@ -347,6 +354,7 @@ enum {
     uniforms[UNIFORM_MODEL] = glGetUniformLocation(program, "Model");
     uniforms[UNIFORM_VIEW] = glGetUniformLocation(program, "View");
     uniforms[UNIFORM_PROJECTION] = glGetUniformLocation(program, "Projection");
+    uniforms[UNIFORM_TEXTURESAMPLER] = glGetUniformLocation(program, "TextureSampler");
     
     // Release vertex and fragment shaders.
     if (vertShader)

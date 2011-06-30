@@ -12,6 +12,7 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 #import "Mesh.h"
+#import "Texture.h"
 
 @interface OpenShooterViewController : UIViewController {
 @private
@@ -23,6 +24,7 @@
     CADisplayLink *displayLink;
     
     Mesh *mesh;
+    Texture *texture;
 }
 
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;

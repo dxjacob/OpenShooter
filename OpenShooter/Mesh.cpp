@@ -28,8 +28,8 @@ Mesh::Mesh()
         // texture coord
         float u =  i / (float)sides;
         
-        vertices.push_back( Vertex( Vector(x, -height/2, z), color, TextureCoord(u, 0) ) );
-        vertices.push_back( Vertex( Vector(x, height/2, z), color, TextureCoord(u, 1) ) );
+        vertices.push_back( Vertex( Vector3(x, -height/2, z), color, TextureCoord(u, 0) ) );
+        vertices.push_back( Vertex( Vector3(x, height/2, z), color, TextureCoord(u, 1) ) );
     }  
 
     glGenBuffers(1, &bufferId_);
