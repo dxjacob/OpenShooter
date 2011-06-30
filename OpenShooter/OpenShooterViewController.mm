@@ -10,10 +10,12 @@
 
 #import "OpenShooterViewController.h"
 #import "EAGLView.h"
+#include "vectormath/vectormath_aos.h"
+using namespace Vectormath::Aos;
 
 // Uniform index.
 enum {
-    UNIFORM_TRANSLATE,
+    UNIFORM_VIEW,
     NUM_UNIFORMS
 };
 GLint uniforms[NUM_UNIFORMS];
@@ -165,6 +167,11 @@ enum {
         
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
+
+    static float time = 0;
+    time += 0.075;
+    Matrix4 matrix = Matrix4::translation(Vector3(sinf(time), 0, 0));
+    glUniformMatrix4fv(UNIFORM_VIEW, 1, 0, &matrix[0][0]);
     
     // Use shader program.
     glUseProgram(program);
@@ -317,7 +324,7 @@ enum {
     }
     
     // Get uniform locations.
-    uniforms[UNIFORM_TRANSLATE] = glGetUniformLocation(program, "translate");
+    uniforms[UNIFORM_VIEW] = glGetUniformLocation(program, "View");
     
     // Release vertex and fragment shaders.
     if (vertShader)

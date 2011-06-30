@@ -47,6 +47,12 @@
 		B946D54813B6C6870004D676 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/OpenShooterViewController.xib; sourceTree = "<group>"; };
 		B971485413BBBC9A0039DE45 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
 		B971485513BBBC9B0039DE45 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
+		B9EB412C13BC3B74006FF790 /* boolInVec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = boolInVec.h; sourceTree = "<group>"; };
+		B9EB412D13BC3B74006FF790 /* floatInVec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = floatInVec.h; sourceTree = "<group>"; };
+		B9EB412E13BC3B74006FF790 /* mat_aos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mat_aos.h; sourceTree = "<group>"; };
+		B9EB412F13BC3B74006FF790 /* quat_aos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = quat_aos.h; sourceTree = "<group>"; };
+		B9EB413013BC3B74006FF790 /* vec_aos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vec_aos.h; sourceTree = "<group>"; };
+		B9EB413113BC3B74006FF790 /* vectormath_aos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vectormath_aos.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +103,7 @@
 		B946D52E13B6C6870004D676 /* OpenShooter */ = {
 			isa = PBXGroup;
 			children = (
+				B9EB412B13BC3B74006FF790 /* vectormath */,
 				B946D53713B6C6870004D676 /* OpenShooterAppDelegate.h */,
 				B946D53813B6C6870004D676 /* OpenShooterAppDelegate.mm */,
 				B946D53A13B6C6870004D676 /* MainWindow.xib */,
@@ -123,6 +130,19 @@
 				B946D53513B6C6870004D676 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B9EB412B13BC3B74006FF790 /* vectormath */ = {
+			isa = PBXGroup;
+			children = (
+				B9EB412C13BC3B74006FF790 /* boolInVec.h */,
+				B9EB412D13BC3B74006FF790 /* floatInVec.h */,
+				B9EB412E13BC3B74006FF790 /* mat_aos.h */,
+				B9EB412F13BC3B74006FF790 /* quat_aos.h */,
+				B9EB413013BC3B74006FF790 /* vec_aos.h */,
+				B9EB413113BC3B74006FF790 /* vectormath_aos.h */,
+			);
+			path = vectormath;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -11,10 +11,10 @@ attribute vec4 color;
 
 varying vec4 Color;
 
-uniform float translate;
+uniform mat4 View;
 
 void main()
 {
-    gl_Position = position;
+    gl_Position = View * position;
     Color = color;
 }
