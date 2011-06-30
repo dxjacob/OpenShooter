@@ -63,6 +63,7 @@ enum {
     self.displayLink = nil;
 
     mesh = new Mesh();
+    glEnable(GL_DEPTH_TEST);
 }
 
 - (void)dealloc
@@ -167,7 +168,7 @@ enum {
     [(EAGLView *)self.view setFramebuffer];
         
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     static float time = 0;
     time += 0.075;
@@ -176,12 +177,12 @@ enum {
     glUseProgram(program);
     
     // view
-    Matrix4 view = Matrix4::translation(Vector3(0, 0, -10)) * Matrix4::rotationX(time);
+    Matrix4 view = Matrix4::translation(Vector3(0, 0, -6)) * Matrix4::rotationX(time);
     glUniformMatrix4fv(uniforms[UNIFORM_VIEW], 1, 0, &view[0][0]);
     
     // projection
     CGSize size = [self view].frame.size;
-    Matrix4 projection = Matrix4::perspective(45*M_PI/360.0, size.width/(float)size.height, 0.001, 100);
+    Matrix4 projection = Matrix4::perspective(45*M_PI/360.0, size.width/(float)size.height, 1, 100);
     glUniformMatrix4fv(uniforms[UNIFORM_PROJECTION], 1, 0, &projection[0][0]);
     
     // Use shader program.
