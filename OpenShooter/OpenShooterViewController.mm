@@ -15,6 +15,7 @@ using namespace Vectormath::Aos;
 
 // Uniform index.
 enum {
+    UNIFORM_MODEL,
     UNIFORM_VIEW,
     UNIFORM_PROJECTION,
     NUM_UNIFORMS
@@ -177,7 +178,10 @@ enum {
     glUseProgram(program);
     
     // view
-    Matrix4 view = Matrix4::translation(Vector3(0, 0, -6)) * Matrix4::rotationX(time);
+    Matrix4 model = Matrix4::rotationX(time*0.1);
+    glUniformMatrix4fv(uniforms[UNIFORM_MODEL], 1, 0, &model[0][0]);
+    
+    Matrix4 view = Matrix4::lookAt(Point3(0, 5, -5), Point3(0,0,0), Vector3(0,1,0));
     glUniformMatrix4fv(uniforms[UNIFORM_VIEW], 1, 0, &view[0][0]);
     
     // projection
@@ -335,6 +339,7 @@ enum {
     }
     
     // Get uniform locations.
+    uniforms[UNIFORM_MODEL] = glGetUniformLocation(program, "Model");
     uniforms[UNIFORM_VIEW] = glGetUniformLocation(program, "View");
     uniforms[UNIFORM_PROJECTION] = glGetUniformLocation(program, "Projection");
     
