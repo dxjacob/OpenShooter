@@ -8,7 +8,7 @@ using namespace std;
 
 Mesh::Mesh()
 {
-    int sides = 9;
+    int sides = 6;
     float radius = 0.2;
     float height = 0.5;
     
@@ -28,8 +28,11 @@ Mesh::Mesh()
         // texture coord
         float u =  i / (float)sides;
         
-        vertices.push_back( Vertex( Vector3(x, -height/2, z), color, TextureCoord(u, 0) ) );
-        vertices.push_back( Vertex( Vector3(x, height/2, z), color, TextureCoord(u, 1) ) );
+        // normal
+        Vector3 normal(cosf(angle), 0, sinf(angle));
+        
+        vertices.push_back( Vertex( Vector3(x, -height/2, z), color, TextureCoord(u, 0), normal ) );
+        vertices.push_back( Vertex( Vector3(x, height/2, z), color, TextureCoord(u, 1), normal ) );
     }  
 
     glGenBuffers(1, &bufferId_);
@@ -37,9 +40,8 @@ Mesh::Mesh()
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertexCount_, &vertices[0], GL_STATIC_DRAW);
 }
 
-void Mesh::Draw(int positionAttrib, int colorAttrib, int textureAttrib)
+void Mesh::Draw(int positionAttrib, int colorAttrib, int textureAttrib, int normalAttrib)
 {
-
     glBindBuffer(GL_ARRAY_BUFFER, bufferId_);
     
     glVertexAttribPointer(positionAttrib, 3, GL_FLOAT, 0, sizeof(Vertex), (GLvoid*)offsetof(Vertex, position));
@@ -50,6 +52,9 @@ void Mesh::Draw(int positionAttrib, int colorAttrib, int textureAttrib)
     
     glVertexAttribPointer(textureAttrib, 2, GL_FLOAT, 0, sizeof(Vertex), (GLvoid*)offsetof(Vertex, textureCoord));
     glEnableVertexAttribArray(textureAttrib);
+    
+    glVertexAttribPointer(normalAttrib, 3, GL_FLOAT, 0, sizeof(Vertex), (GLvoid*)offsetof(Vertex, normal));
+    glEnableVertexAttribArray(normalAttrib);
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, vertexCount_);
 }

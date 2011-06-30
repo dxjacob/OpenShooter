@@ -7,7 +7,7 @@ public:
     Mesh();
     ~Mesh();
     
-    void Draw(int vertexAttribute, int colorAttribute, int textureAttrib);
+    void Draw(int vertexAttribute, int colorAttribute, int textureAttrib, int normalAttrib);
     
 private:
     GLuint bufferId_;

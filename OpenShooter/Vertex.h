@@ -27,9 +27,10 @@ struct Vertex
     Vector3 position;
     Color color;
     TextureCoord textureCoord;
+    Vector3 normal;
     
     Vertex() {};
-    Vertex(Vector3 position, Color color, TextureCoord textureCoord)
-    : position(position), color(color), textureCoord(textureCoord)
+    Vertex(Vector3 position, Color color, TextureCoord textureCoord, Vector3 normal)
+    : position(position), color(color), textureCoord(textureCoord), normal(normal)
     {}
 };
