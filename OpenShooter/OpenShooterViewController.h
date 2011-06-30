@@ -13,6 +13,7 @@
 #import <OpenGLES/ES2/glext.h>
 #import "Mesh.h"
 #import "Texture.h"
+#import <vector>
 
 @interface OpenShooterViewController : UIViewController {
 @private
@@ -25,6 +26,7 @@
     
     Mesh *mesh;
     Texture *texture;
+    std::vector<Point3> projectiles;
 }
 
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;

@@ -10,6 +10,7 @@
 
 #import "OpenShooterViewController.h"
 #import "EAGLView.h"
+using namespace std;
 
 // Uniform index.
 enum {
@@ -168,8 +169,32 @@ enum {
     }
 }
 
+- (void)update
+{
+    const float RemoveDistance = 10;
+    const float ProjectileSpeed = 0.25;
+    
+    // update projectiles
+    vector<Point3>::iterator it;
+    for (it = projectiles.begin(); it != projectiles.end();)
+    {
+        Point3& position = *it;
+        
+        // update position 
+        position += Vector3(0,0,ProjectileSpeed);
+        
+        // remove
+        if (position.getZ() > RemoveDistance)
+            projectiles.erase(it);
+        else
+            it++;
+    }
+}
+
 - (void)drawFrame
 {
+    [self update];
+    
     [(EAGLView *)self.view setFramebuffer];
         
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
@@ -187,8 +212,8 @@ enum {
     glUniform1i(uniforms[UNIFORM_TEXTURESAMPLER], 0);
     
     // view
-    Point3 cameraPosition(0, 5, -5);
-    Matrix4 view = Matrix4::lookAt(cameraPosition, Point3(0,0,0), Vector3(0,1,0));
+    Point3 cameraPosition(0, 1, -5);
+    Matrix4 view = Matrix4::lookAt(cameraPosition, Point3(0,0.5,0), Vector3(0,1,0));
     glUniformMatrix4fv(uniforms[UNIFORM_VIEW], 1, 0, &view[0][0]);
     glUniform3fv(uniforms[UNIFORM_CAMERAPOSITION], 1, &cameraPosition[0]);
     
@@ -197,15 +222,13 @@ enum {
     Matrix4 projection = Matrix4::perspective(45*M_PI/360.0, size.width/(float)size.height, 1, 100);
     glUniformMatrix4fv(uniforms[UNIFORM_PROJECTION], 1, 0, &projection[0][0]);
     
-    // draw once
-    Matrix4 model = Matrix4::translation(Vector3(0.5,0,0)) * Matrix4::rotationY(time*0.25);
-    glUniformMatrix4fv(uniforms[UNIFORM_MODEL], 1, 0, &model[0][0]);
-    mesh->Draw(ATTRIB_VERTEX, ATTRIB_COLOR, ATTRIB_TEXTURECOORD, ATTRIB_NORMAL);
-    
-    // draw twice
-    model = Matrix4::translation(Vector3(-0.5,0,0)) * Matrix4::rotationX(-time);
-    glUniformMatrix4fv(uniforms[UNIFORM_MODEL], 1, 0, &model[0][0]);
-    mesh->Draw(ATTRIB_VERTEX, ATTRIB_COLOR, ATTRIB_TEXTURECOORD, ATTRIB_NORMAL);
+    // draw projectiles
+    for (int i = 0, count = projectiles.size(); i < count; ++i)
+    {
+        Matrix4 model = Matrix4::translation(Vector3(projectiles[i]));
+        glUniformMatrix4fv(uniforms[UNIFORM_MODEL], 1, 0, &model[0][0]);
+        mesh->Draw(ATTRIB_VERTEX, ATTRIB_COLOR, ATTRIB_TEXTURECOORD, ATTRIB_NORMAL);
+    }
     
     [(EAGLView *)self.view presentFramebuffer];
 }
@@ -370,5 +393,11 @@ enum {
     
     return TRUE;
 }
+
+- (void) touchesBegan: (NSSet*) touches withEvent: (UIEvent*) event
+{
+    projectiles.push_back(Point3(0,0,0));
+}
+
 
 @end
