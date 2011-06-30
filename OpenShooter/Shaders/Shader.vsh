@@ -13,6 +13,7 @@ attribute vec3 normal;
 
 varying vec3 Color;
 varying vec2 TextureCoord;
+varying vec3 Normal;
 
 uniform mat4 Model;
 uniform mat4 View;
@@ -24,13 +25,6 @@ const vec3 LightColor = vec3(1, 1, 1);
 void main()
 {
     gl_Position = Projection * View * Model * position;
-    
-    // transform normal
-    vec4 n = Model * vec4(normal,0);
-    
-    // N dot L
-    float diffuse = dot(n.xyz, LightDirection);
-    
-    Color = LightColor * diffuse;
+    Normal = mat3(Model) * normal;
     TextureCoord = textureCoord;
 }
