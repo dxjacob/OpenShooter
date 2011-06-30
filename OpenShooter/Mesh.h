@@ -20,14 +20,24 @@ struct Color
     {}
 };
 
+struct TextureCoord
+{
+    float u, v;
+    TextureCoord() {}
+    TextureCoord(float u, float v)
+    : u(u), v(v)
+    {}
+};
+
 struct Vertex
 {
     Vector position;
     Color color;
+    TextureCoord textureCoord;
     
     Vertex() {};
-    Vertex(Vector position, Color color)
-    : position(position), color(color)
+    Vertex(Vector position, Color color, TextureCoord textureCoord)
+    : position(position), color(color), textureCoord(textureCoord)
     {}
 };
 
@@ -37,7 +47,7 @@ public:
     Mesh();
     ~Mesh();
     
-    void Draw(int vertexAttribute, int colorAttribute);
+    void Draw(int vertexAttribute, int colorAttribute, int textureAttrib);
     
 private:
     GLuint bufferId_;

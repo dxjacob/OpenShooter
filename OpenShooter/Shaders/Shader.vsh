@@ -8,8 +8,10 @@
 
 attribute vec4 position;
 attribute vec4 color;
+attribute vec2 textureCoord;
 
 varying vec4 Color;
+varying vec2 TextureCoord;
 
 uniform mat4 Model;
 uniform mat4 View;
@@ -19,4 +21,5 @@ void main()
 {
     gl_Position = Projection * View * Model * position;
     Color = color;
+    TextureCoord = textureCoord;
 }
