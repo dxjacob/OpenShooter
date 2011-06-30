@@ -8,7 +8,6 @@ using namespace std;
 
 Mesh* Mesh::CreateCylinder(int sides, float radius, float height)
 {
-    int vertexCount = 2 * (sides + 1);
     vector<Vertex> vertices;
     for (int i = 0; i <= sides; ++i)
     {
@@ -34,14 +33,9 @@ Mesh* Mesh::CreateCylinder(int sides, float radius, float height)
     GLuint bufferId;
     glGenBuffers(1, &bufferId);
     glBindBuffer(GL_ARRAY_BUFFER, bufferId);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertexCount, &vertices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
     
-    return new Mesh(bufferId, vertexCount);
-}
-
-Mesh* Mesh::CreateQuad()
-{
-    return new Mesh(0, 0);
+    return new Mesh(bufferId, vertices.size());
 }
 
 void Mesh::Draw(int positionAttrib, int colorAttrib, int textureAttrib, int normalAttrib)

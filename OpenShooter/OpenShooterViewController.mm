@@ -62,6 +62,9 @@ enum {
     
     [self loadShaders];
     
+    [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / 100)];
+    [[UIAccelerometer sharedAccelerometer] setDelegate:self];
+    
     animating = FALSE;
     animationFrameInterval = 1;
     self.displayLink = nil;
@@ -193,8 +196,10 @@ enum {
     glUniform1i(uniforms[UNIFORM_TEXTURESAMPLER], 0);
     
     // view
-    Point3 cameraPosition(0, 1, -5);
-    Matrix4 view = Matrix4::lookAt(cameraPosition, Point3(0,0.5,0), Vector3(0,1,0));
+    float angle = state->GetPlayerDirection();
+    Point3 cameraPosition = state->GetPlayerPosition() + Vector3(0, 1, 0);
+    Vector3 look(sin(angle), -0.1, cos(angle));
+    Matrix4 view = Matrix4::lookAt(cameraPosition, cameraPosition + look, Vector3(0,1,0));
     glUniformMatrix4fv(uniforms[UNIFORM_VIEW], 1, 0, &view[0][0]);
     glUniform3fv(uniforms[UNIFORM_CAMERAPOSITION], 1, &cameraPosition[0]);
     
@@ -204,10 +209,10 @@ enum {
     glUniformMatrix4fv(uniforms[UNIFORM_PROJECTION], 1, 0, &projection[0][0]);
     
     // draw projectiles
-    const std::vector<Point3>& projectiles = state->GetProjectiles();
+    const std::vector<Projectile>& projectiles = state->GetProjectiles();
     for (int i = 0, count = projectiles.size(); i < count; ++i)
     {
-        Matrix4 model = Matrix4::translation(Vector3(projectiles[i]));
+        Matrix4 model = Matrix4::translation(Vector3(projectiles[i].position)) * Matrix4::scale(Vector3(.2,.1,.2));
         glUniformMatrix4fv(uniforms[UNIFORM_MODEL], 1, 0, &model[0][0]);
         mesh->Draw(ATTRIB_VERTEX, ATTRIB_COLOR, ATTRIB_TEXTURECOORD, ATTRIB_NORMAL);
     }
@@ -387,6 +392,15 @@ enum {
 - (void) touchesBegan: (NSSet*) touches withEvent: (UIEvent*) event
 {
     state->Shoot();
+}
+
+float accelX = 0;
+- (void)accelerometer:(UIAccelerometer *)accelerometer
+        didAccelerate:(UIAcceleration *)acceleration
+{
+    float k = 0.95;
+    accelX = k * accelX + (1.0 - k) * acceleration.x;
+    state->RotatePlayer(accelX);
 }
 
 

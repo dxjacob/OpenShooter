@@ -13,7 +13,6 @@ public:
     void Draw(int vertexAttribute, int colorAttribute, int textureAttrib, int normalAttrib);
     
     static Mesh* CreateCylinder(int sides, float radius, float height);
-    static Mesh* CreateQuad();
     
 private:
     GLuint bufferId_;

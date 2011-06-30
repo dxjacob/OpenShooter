@@ -16,7 +16,7 @@
 #import "Texture.h"
 #import "Mesh.h"
 
-@interface OpenShooterViewController : UIViewController {
+@interface OpenShooterViewController : UIViewController <UIAccelerometerDelegate> {
 @private
     EAGLContext *context;
     GLuint program;

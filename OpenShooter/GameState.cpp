@@ -12,15 +12,25 @@ const float EnemySpawnRange= 3;
 const float EnemySpeed = 0.5;
 const float EnemyRadius = 0.3;
 
+const float ViewRotationScale = 0.2;
+
 GameState::GameState()
 {
-    playerPosition_ = Point3(0,0,0);
+    playerDirection_ = 0;
+    playerPosition_ = Point3(0,0,-5);
     totalTime_ = lastSpawnTime_ = 0;
 }
 
 void GameState::Shoot()
 {
-    projectiles_.push_back(Point3(0,0,0));
+    Vector3 direction(sin(playerDirection_), 0, cos(playerDirection_));
+    projectiles_.push_back(Projectile(playerPosition_, direction));
+}
+
+void GameState::RotatePlayer(float angle)
+{
+    playerDirection_ = -angle * ViewRotationScale;
+
 }
 
 void GameState::Update(float dt)
@@ -35,13 +45,13 @@ void GameState::Update(float dt)
 
 void GameState::UpdateProjectiles(float dt)
 {
-    vector<Point3>::iterator it;
+    vector<Projectile>::iterator it;
     for (it = projectiles_.begin(); it != projectiles_.end();)
     {
-        Point3& position = *it;
+        Point3& position = it->position;
         
         // update position 
-        position += Vector3(0,0,ProjectileSpeed*dt);
+        position += ProjectileSpeed*dt*it->direction;
         
         // remove
         if (position.getZ() > ProjectileRemoveDistance)
@@ -64,8 +74,8 @@ void GameState::UpdateEnemies(float dt)
         // remove
         if (position.getZ() < EnemeyRemoveDistance)
             enemies_.erase(it);
-            else
-                it++;
+        else
+            it++;
     }
 }
 
@@ -80,10 +90,10 @@ void GameState::SpawnEnemies()
     }  
 }
 
-bool didCollide(Point3 point0, float radius0, Point3 point1, float radius1)
+bool didSpheresCollide(Point3 pointA, float radiusA, Point3 pointB, float radiusB)
 {
-    float distanceSquared = distSqr(point0, point1);
-    float radius = radius0 + radius1;
+    float distanceSquared = distSqr(pointA, pointB);
+    float radius = radiusA + radiusB;
     return distanceSquared < radius * radius;
 }
     
@@ -93,10 +103,10 @@ void GameState::HandleCollision()
     for (enemyIterator = enemies_.begin(); enemyIterator != enemies_.end();)
     {
         bool collision = false;
-        vector<Point3>::iterator projectileIterator;
+        vector<Projectile>::iterator projectileIterator;
         for(projectileIterator = projectiles_.begin(); projectileIterator != projectiles_.end(); )
         {
-            collision = didCollide(*projectileIterator, ProjectileRadius, *enemyIterator, EnemyRadius);
+            collision = didSpheresCollide(projectileIterator->position, ProjectileRadius, *enemyIterator, EnemyRadius);
             
             // remove projectile
             if (collision)
