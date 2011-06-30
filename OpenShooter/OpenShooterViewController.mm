@@ -177,10 +177,6 @@ enum {
     // shader
     glUseProgram(program);
     
-    // view
-    Matrix4 model = Matrix4::rotationX(time*0.1);
-    glUniformMatrix4fv(uniforms[UNIFORM_MODEL], 1, 0, &model[0][0]);
-    
     Matrix4 view = Matrix4::lookAt(Point3(0, 5, -5), Point3(0,0,0), Vector3(0,1,0));
     glUniformMatrix4fv(uniforms[UNIFORM_VIEW], 1, 0, &view[0][0]);
     
@@ -189,7 +185,14 @@ enum {
     Matrix4 projection = Matrix4::perspective(45*M_PI/360.0, size.width/(float)size.height, 1, 100);
     glUniformMatrix4fv(uniforms[UNIFORM_PROJECTION], 1, 0, &projection[0][0]);
     
-    // Use shader program.
+    // draw once
+    Matrix4 model = Matrix4::translation(Vector3(0.5,0,0)) * Matrix4::rotationX(time*0.1);
+    glUniformMatrix4fv(uniforms[UNIFORM_MODEL], 1, 0, &model[0][0]);
+    mesh->Draw(ATTRIB_VERTEX, ATTRIB_COLOR);
+    
+    // draw twice
+    model = Matrix4::translation(Vector3(-0.5,0,0)) * Matrix4::rotationX(-time);
+    glUniformMatrix4fv(uniforms[UNIFORM_MODEL], 1, 0, &model[0][0]);
     mesh->Draw(ATTRIB_VERTEX, ATTRIB_COLOR);
     
     [(EAGLView *)self.view presentFramebuffer];
