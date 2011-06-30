@@ -12,9 +12,10 @@ attribute vec4 color;
 varying vec4 Color;
 
 uniform mat4 View;
+uniform mat4 Projection;
 
 void main()
 {
-    gl_Position = View * position;
+    gl_Position = Projection * View * position;
     Color = color;
 }

@@ -16,6 +16,7 @@ using namespace Vectormath::Aos;
 // Uniform index.
 enum {
     UNIFORM_VIEW,
+    UNIFORM_PROJECTION,
     NUM_UNIFORMS
 };
 GLint uniforms[NUM_UNIFORMS];
@@ -170,11 +171,20 @@ enum {
 
     static float time = 0;
     time += 0.075;
-    Matrix4 matrix = Matrix4::translation(Vector3(sinf(time), 0, 0));
-    glUniformMatrix4fv(UNIFORM_VIEW, 1, 0, &matrix[0][0]);
+    
+    // shader
+    glUseProgram(program);
+    
+    // view
+    Matrix4 view = Matrix4::translation(Vector3(0, 0, -10)) * Matrix4::rotationX(time);
+    glUniformMatrix4fv(uniforms[UNIFORM_VIEW], 1, 0, &view[0][0]);
+    
+    // projection
+    CGSize size = [self view].frame.size;
+    Matrix4 projection = Matrix4::perspective(45*M_PI/360.0, size.width/(float)size.height, 0.001, 100);
+    glUniformMatrix4fv(uniforms[UNIFORM_PROJECTION], 1, 0, &projection[0][0]);
     
     // Use shader program.
-    glUseProgram(program);
     mesh->Draw(ATTRIB_VERTEX, ATTRIB_COLOR);
     
     [(EAGLView *)self.view presentFramebuffer];
@@ -325,6 +335,7 @@ enum {
     
     // Get uniform locations.
     uniforms[UNIFORM_VIEW] = glGetUniformLocation(program, "View");
+    uniforms[UNIFORM_PROJECTION] = glGetUniformLocation(program, "Projection");
     
     // Release vertex and fragment shaders.
     if (vertShader)
